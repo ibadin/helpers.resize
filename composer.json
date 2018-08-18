@@ -1,7 +1,7 @@
 {
   "name": "pxl/helpers.resize",
   "description": "Библиотека содержит классы облегчающие работу с ресайзингом изображений",
-  "keywords": ["bitrix", "1С Битрикс", "максимастер", "ресайз", "изображения"],
+  "keywords": ["bitrix", "1С Битрикс", "ресайз", "изображения"],
   "license": "MIT",
   "support": {
     "www": "http://www.pxl-pro.com",
