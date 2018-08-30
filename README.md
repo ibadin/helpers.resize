@@ -71,16 +71,17 @@ $arCollection = ImageResizeCollection::byIds([49057, 49056])
       =>SRC
       =>WIDTH
       =>HEIGHT
-49056
   MEDIUM
       IMAGE
-      =>BASE64
-      =>SRC
-      =>WIDTH
-      =>HEIGHT
-    HOLDER
-      =>BASE64
-      =>SRC
-      =>WIDTH
-      =>HEIGHT
+        =>BASE64
+        =>SRC
+        =>WIDTH
+       =>HEIGHT
+      HOLDER
+        =>BASE64
+        =>SRC
+        =>WIDTH
+        =>HEIGHT
+49056
+...
 ```
