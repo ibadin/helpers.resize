@@ -22,8 +22,10 @@ class ImageResize
         return $instance;
     }
 
+
     /**
      * @return mixed
+     * @throws InvalidArgumentException
      * @throws \Exception
      */
     public function resize()
@@ -42,10 +44,11 @@ class ImageResize
         return $arResize;
     }
 
+
     /**
      * @param $size
      * @return array
-     * @throws \Exception
+     * @throws InvalidArgumentException
      */
     private function getSizeArray($size)
     {
@@ -55,7 +58,7 @@ class ImageResize
 
         list($full, $width, $height) = $matches;
 
-        if (!isset($full)) throw new \InvalidArgumentException('Size argument is wrong');
+        if (!isset($full)) throw new InvalidArgumentException('Size argument is wrong');
 
         return [
             "width" => $width,
@@ -71,6 +74,10 @@ class ImageResize
         ];
     }
 
+    /**
+     * @return mixed
+     * @throws InvalidArgumentException
+     */
     private function getPlaceholder()
     {
         $arSmall = \CFile::ResizeImageGet($this->id, $this->getSizeArray($this->settings->getHolderSize()), ImageResizeTypes::CROP, true, $this->getFilter());
