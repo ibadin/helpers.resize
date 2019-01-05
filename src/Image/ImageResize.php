@@ -22,8 +22,15 @@ class ImageResize
         return $instance;
     }
 
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
     public function resize()
     {
+        $originImage = \CFile::GetFileArray($this->id);
+        $arResize["ORIGIN_IMAGE"] = $this->toImageArray($originImage);
+
         $arImage = \CFile::ResizeImageGet($this->id, $this->getSizeArray($this->settings->getSize()), $this->settings->getResizeType(), true, $this->getFilter());
         $arResize["IMAGE"] = $this->toImageArray($arImage);
 
@@ -62,15 +69,42 @@ class ImageResize
 
     }
 
+    /**
+     * @param array $arImage
+     * @return array
+     * @throws \Exception
+     */
     private function toImageArray(array $arImage)
     {
         return [
-            "BASE64" => $this->toBase64(Application::getDocumentRoot() . $arImage["src"]),
-            "SRC" => $arImage["src"],
-            "WIDTH" => $arImage["width"],
-            "HEIGHT" => $arImage["height"],
-            "SIZE" => $arImage["size"],
+            "BASE64" => $this->toBase64(Application::getDocumentRoot() . $this->getImageValue($arImage, "src")),
+            "SRC" => $this->getImageValue($arImage, "src"),
+            "WIDTH" => $this->getImageValue($arImage, "width"), $arImage["width"],
+            "HEIGHT" => $this->getImageValue($arImage, "height"),
+            "SIZE" => $this->getImageValue($arImage, "size"),
         ];
+    }
+
+    /**
+     * @param $key
+     * @param $arImage
+     * @return mixed
+     * @throws \Exception
+     */
+    private function getImageValue($arImage, $key)
+    {
+        $lowerKey = mb_strtolower($key);
+        $upperKey = mb_strtoupper($key);
+
+        if (isset($arImage[$lowerKey])) {
+            return $arImage[$lowerKey];
+        }
+
+        if (isset($arImage[$upperKey])) {
+            return $arImage[$upperKey];
+        }
+
+        throw new \Exception('No find key ' . $key . ' in array');
     }
 
     /**
