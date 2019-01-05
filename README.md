@@ -30,6 +30,11 @@ $imageResize = ImageResize::init($id, $imageSettings)->resize();
 
 Метод resize() вернет массив вида:
 ``` 
+ORIGIN_IMAGE
+  =>BASE64
+  =>SRC
+  =>WIDTH
+  =>HEIGHT
 IMAGE
   =>BASE64
   =>SRC
@@ -61,6 +66,11 @@ $arCollection = ImageResizeCollection::byIds([49057, 49056])
 ``` 
 49057
   LARGE
+    ORIGIN_IMAGE
+      =>BASE64
+      =>SRC
+      =>WIDTH
+      =>HEIGHT
     IMAGE
       =>BASE64
       =>SRC
@@ -72,6 +82,11 @@ $arCollection = ImageResizeCollection::byIds([49057, 49056])
       =>WIDTH
       =>HEIGHT
   MEDIUM
+      ORIGIN_IMAGE
+        =>BASE64
+        =>SRC
+        =>WIDTH
+        =>HEIGHT
       IMAGE
         =>BASE64
         =>SRC
@@ -85,3 +100,9 @@ $arCollection = ImageResizeCollection::byIds([49057, 49056])
 49056
 ...
 ```
+# ImageResizeTypes
+ImageResizeTypes::CROP — Масштабирует в прямоугольник $size c сохранением пропорций, обрезая лишнее, аналог (BX_RESIZE_IMAGE_EXACT)
+
+ImageResizeTypes::PROPORTIONAL — Масштабирует с сохранением пропорций, размер ограничивается $size, аналог (BX_RESIZE_IMAGE_PROPORTIONAL)
+
+ImageResizeTypes::PROPORTIONAL_ALT — Масштабирует с сохранением пропорций за ширину при этом принимается максимальное значение из высоты/ширины, размер ограничивается $size, улучшенная обработка вертикальных картинок, аналог (BX_RESIZE_IMAGE_PROPORTIONAL_ALT);

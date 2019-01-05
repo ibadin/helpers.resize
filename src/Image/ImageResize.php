@@ -176,15 +176,3 @@ class ImageResize
     }
 
 }
-
-//function insert_base64_encoded_image($img, $echo = false)
-//{
-//    $imageSize = getimagesize($img);
-//    $imageData = base64_encode(file_get_contents($img));
-//    $imageHTML = "data:{$imageSize['mime']};base64,{$imageData}";
-//    if ($echo == true) {
-//        echo $imageHTML;
-//    } else {
-//        return $imageHTML;
-//    }
-//}
