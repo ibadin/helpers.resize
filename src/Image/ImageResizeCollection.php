@@ -13,7 +13,7 @@ class ImageResizeCollection
         $this->arImageIds = $arImageIds;
     }
 
-    public function byIds($arImageIds)
+    public static function byIds($arImageIds)
     {
         $instance = new self($arImageIds);
         return $instance;
