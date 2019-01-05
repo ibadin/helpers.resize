@@ -42,9 +42,20 @@ class ImageResize
         return $arResize;
     }
 
+    /**
+     * @param $size
+     * @return array
+     * @throws \Exception
+     */
     private function getSizeArray($size)
     {
-        list($width, $height) = explode("x", $size);
+        $re = '/(\d*)[a-z | а-я | ,.\-\/\\\\\:](\d*)/mi';
+
+        preg_match_all($re, $size, $matches, PREG_SET_ORDER, 0);
+
+        list($full, $width, $height) = $matches;
+
+        if (!isset($full)) throw new \InvalidArgumentException('Size argument is wrong');
 
         return [
             "width" => $width,
@@ -79,7 +90,7 @@ class ImageResize
         return [
             "BASE64" => $this->toBase64(Application::getDocumentRoot() . $this->getImageValue($arImage, "src")),
             "SRC" => $this->getImageValue($arImage, "src"),
-            "WIDTH" => $this->getImageValue($arImage, "width"), $arImage["width"],
+            "WIDTH" => $this->getImageValue($arImage, "width"),
             "HEIGHT" => $this->getImageValue($arImage, "height"),
             "SIZE" => $this->getImageValue($arImage, "size"),
         ];
