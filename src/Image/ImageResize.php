@@ -90,7 +90,6 @@ class ImageResize
     /**
      * @param array $arImage
      * @return array
-     * @throws \Exception
      */
     private function toImageArray(array $arImage)
     {
@@ -99,7 +98,7 @@ class ImageResize
             "SRC" => $this->getImageValue($arImage, "src"),
             "WIDTH" => $this->getImageValue($arImage, "width"),
             "HEIGHT" => $this->getImageValue($arImage, "height"),
-            "SIZE" => $this->getImageValue($arImage, "size"),
+            "SIZE" => $this->getImageValue($arImage, "size") | $this->getImageValue($arImage, "file_size"),
         ];
     }
 
@@ -107,7 +106,6 @@ class ImageResize
      * @param $key
      * @param $arImage
      * @return mixed
-     * @throws \Exception
      */
     private function getImageValue($arImage, $key)
     {
@@ -122,7 +120,7 @@ class ImageResize
             return $arImage[$upperKey];
         }
 
-        throw new \Exception('No find key ' . $key . ' in array');
+        return null;
     }
 
     /**
