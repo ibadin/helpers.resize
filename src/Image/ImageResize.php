@@ -114,13 +114,11 @@ class ImageResize
         $lowerKey = mb_strtolower($key);
         $upperKey = mb_strtoupper($key);
 
-        if (isset($arImage[$lowerKey])) {
+        if (isset($arImage[$lowerKey]))
             return $arImage[$lowerKey];
-        }
 
-        if (isset($arImage[$upperKey])) {
+        if (isset($arImage[$upperKey]))
             return $arImage[$upperKey];
-        }
 
         return null;
     }
