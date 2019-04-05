@@ -36,7 +36,7 @@ class ImageResize
         $arImage = \CFile::ResizeImageGet($this->id, $this->getSizeArray($this->settings->getSize()), $this->settings->getResizeType(), true, $this->getFilter());
         $arResize["IMAGE"] = $this->toImageArray($arImage);
 
-        if ($this->settings->getBlur()) {
+        if (is_object($this->settings->getBlur())) {
             $arHolder = $this->getPlaceholder();
             $arResize["HOLDER"] = $this->toImageArray($arHolder);
         }
@@ -158,7 +158,7 @@ class ImageResize
     {
         try {
             $image = new \Imagick(Application::getDocumentRoot() . $src);
-            $image->blurImage(5, 3);
+            $image->blurImage($this->settings->getBlur()->getRadius(), $this->settings->getBlur()->getSigma());
             $image->writeImage(Application::getDocumentRoot() . $src);
         } catch (\ImagickException $e) {
             //nothing to do

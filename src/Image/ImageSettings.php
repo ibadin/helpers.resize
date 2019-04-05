@@ -12,7 +12,7 @@ namespace Pxl\Helpers\Image;
 class ImageSettings
 {
     private $size;
-    private $blur = true;
+    private $blur;
     private $resize_type = ImageResizeTypes::PROPORTIONAL;
     private $holderSize = "30x30";
 
@@ -20,17 +20,28 @@ class ImageSettings
     {
         $instance = new self();
         $instance->size = $size;
+        $instance->blur = new BlurSettings(5, 3);
 
         return $instance;
     }
 
     /**
-     * @param bool $blur
+     * @param mixed $blur
      * @return ImageSettings
      */
     public function setBlur($blur)
     {
-        $this->blur = $blur;
+        if (is_array($blur))
+        {
+            if (isset($blur["radius"]))
+                $this->blur->setRadius($blur["radius"]);
+            if (isset($blur["sigma"]))
+                $this->blur->setSigma($blur["sigma"]);
+        }
+        else if (!$blur)
+        {
+            $this->blur = false;
+        }
         return $this;
     }
 
