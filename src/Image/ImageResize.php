@@ -56,8 +56,8 @@ class ImageResize
 
         preg_match_all($re, $size, $matches, PREG_SET_ORDER, 0);
 
-        if ($matches) throw new InvalidArgumentException('Size argument is wrong');
-        
+        if (!$matches) throw new InvalidArgumentException('Size argument is wrong');
+
         list($full, $width, $height) = $matches[0];
 
         if (!isset($full)) throw new InvalidArgumentException('Size argument is wrong');
@@ -114,13 +114,11 @@ class ImageResize
         $lowerKey = mb_strtolower($key);
         $upperKey = mb_strtoupper($key);
 
-        if (isset($arImage[$lowerKey])) {
+        if (isset($arImage[$lowerKey]))
             return $arImage[$lowerKey];
-        }
 
-        if (isset($arImage[$upperKey])) {
+        if (isset($arImage[$upperKey]))
             return $arImage[$upperKey];
-        }
 
         return null;
     }
