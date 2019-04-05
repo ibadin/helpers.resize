@@ -56,7 +56,9 @@ class ImageResize
 
         preg_match_all($re, $size, $matches, PREG_SET_ORDER, 0);
 
-        list($full, $width, $height) = $matches;
+        if (!$matches) throw new InvalidArgumentException('Size argument is wrong');
+
+        list($full, $width, $height) = $matches[0];
 
         if (!isset($full)) throw new InvalidArgumentException('Size argument is wrong');
 
