@@ -56,7 +56,7 @@ $settingsLarge = ImageSettings::withSize("1024x768"); // Задаем настр
 $settingsMedium = ImageSettings::withSize("500x500"); // Задаем настройки для среднего изображения
                                 
 $arCollection = ImageResizeCollection::byIds([49057, 49056])
-                                       ->addSize("LARGE", settingsLarge)
+                                       ->addSize("LARGE", $settingsLarge)
                                        ->addSize("MEDIUM", $settingsMedium)
                                        ->resize();
 ```
